@@ -5,8 +5,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize)]
 pub struct LoginInfo {
-  username: String,
-  token: String,
+  pub username: String,
+  pub token: String,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -26,7 +26,7 @@ pub async fn get_profile(body: web::Json<LoginInfo>) -> HttpResponse {
   let LoginInfo { username, token } = body.into_inner();
 
   let profile = Client::new()
-    .get("https://api.github.com/users/Arcovv")
+    .get(&format!("https://api.github.com/users/{}", username))
     .basic_auth(username, Some(token))
     .header("User-Agent", "Cetus-Rust")
     .send()
