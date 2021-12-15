@@ -1,0 +1,2 @@
+[print_schema]
+file = "cetus_domain/src/schema.rs"
